@@ -26,3 +26,19 @@ from Models.Solicitud import Solicitud
 from Models.Transporte import Transporte
 
 #Controllers import
+from Controllers.MaestroController import MaestroController
+
+#Rutas inicial
+@app.route('/')
+def index():
+    return 'Puedes encontrar la documentacion aqui: '
+
+
+#Rutas maestros
+@app.route('/maestro/all', methods=['GET'])
+def allMaestros(id=None):
+    return MaestroController.all()
+
+@app.route('/maestro/<int:id>', methods=['GET'])
+def maestroIndex(id=None):
+    return MaestroController.index(id)

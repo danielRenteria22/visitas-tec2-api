@@ -5,3 +5,9 @@ import datetime
 class Materia(db.Model):
     id = Column(Integer, primary_key=True)
     nombre = Column(String(80), unique=False, nullable=False)
+
+    def toJson(self):
+        return {
+            "id": self.id,
+            "nombre": self.nombre
+        }
