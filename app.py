@@ -54,6 +54,10 @@ def createSolicitud():
 def indexSolicitud(id=None):
     return SolicitudesController.index(id)
 
+@app.route('/solicitud/all', methods=['GET'])
+def allSolicitud(id=None):
+    return SolicitudesController.all()
+
 @app.route('/solicitud/update/<int:id>', methods=['POST'])
 def updateSolicitud(id=None):
     return SolicitudesController.update(id)
@@ -62,10 +66,41 @@ def updateSolicitud(id=None):
 def deleteSolicitud(id=None):
     return SolicitudesController.delete(id)
 
-@app.route('/solicitud/aprove/<int:id>', methods=['DELETE'])
+@app.route('/solicitud/aprove/<int:id>', methods=['POST'])
 def aproveSolicitud(id=None):
+    return SolicitudesController.aprove(id)
+
+@app.route('/solicitud/unaprove/<int:id>', methods=['POST'])
+def unaproveSolicitud(id=None):
+    return SolicitudesController.unaprove(id)
+
+@app.route('/solicitud/assign/transport/<int:id>', methods=['POST'])
+def assignTransportSolicitud(id=None):
+    return SolicitudesController.assignTransport(id)
+
+
+#Rutas choferes
+@app.route('/choferes/all', methods=['GET'])
+def allChoferes(id=None):
     return Response("Not yet implemented",500)
 
-@app.route('/solicitud/assign/transport/<int:id>', methods=['DELETE'])
-def assignTransportSolicitud(id=None):
-    return Response("Not yet implememted",500)
+@app.route('/choferes/<int:id>', methods=['GET'])
+def indexChoferes(id=None):
+    return Response("Not yet implemented",500)
+
+@app.route('/choferes/disponibles', methods=['GET'])
+def disponiblesChoferes(id=None):
+    return Response("Not yet implemented",500)
+
+#Rutas transportes
+@app.route('/transportes/all', methods=['GET'])
+def alltransportes(id=None):
+    return Response("Not yet implemented",500)
+
+@app.route('/transportes/<int:id>', methods=['GET'])
+def indexTransportes(id=None):
+    return Response("Not yet implemented",500)
+
+@app.route('/transportes/disponibles', methods=['GET'])
+def disponiblesTransportes(id=None):
+    return Response("Not yet implemented",500)
