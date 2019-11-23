@@ -14,12 +14,12 @@ class Chofer(db.Model):
             "apellidos": self.apellidos
         }
 
-    def isAvailable(self,visita):
+    def isAvailable(self,fecha_hora_inicio,fecha_hora_fin):
         visitas_chofer = db.session.query(Solicitud)\
             .filter_by(chofer_id = self.id)\
             .filter_by(aprobada = True)\
-            .filter(or_(Solicitud.fecha_hora_inicio < visita.fecha_hora_fin,
-                Solicitud.fecha_hora_fin > visita.fecha_hora_inicio))\
+            .filter(or_(Solicitud.fecha_hora_inicio < fecha_hora_fin,
+                Solicitud.fecha_hora_fin > fecha_hora_inicio))\
             .first()
 
         return False if visitas_chofer else True
