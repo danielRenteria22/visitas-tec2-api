@@ -2,7 +2,7 @@ from app import db,jsonify
 from sqlalchemy import Column,Integer,DateTime,String,ForeignKey,Boolean
 import datetime
 
-class Kardex(db.Model):
+class Horario(db.Model):
     id = Column(Integer, primary_key=True)
     alumno_num_control = Column(Integer, 
         ForeignKey('alumno.num_control',ondelete='CASCADE'),

@@ -49,3 +49,9 @@ class Maestro(db.Model):
             grupos_json.append(grupo.toJson())
 
         return grupos_json
+
+    def hasGrupo(self,id_grupo):
+        grupo = db.session.query(MateriaHasHorario).filter_by(maestro_id = self.id)\
+            .filter_by(grupo_id = id_grupo).first()
+        
+        return True if grupo else False

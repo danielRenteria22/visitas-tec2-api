@@ -4,7 +4,7 @@ from Grupo import Grupo
 from Materia import Materia
 import datetime
 
-class MateriaHasHorario(db.Model):
+class MateriaHasGrupo(db.Model):
     id = Column(Integer, primary_key=True)
     materia_id =  Column(Integer, 
         ForeignKey('materia.id',ondelete='CASCADE'),
@@ -15,8 +15,7 @@ class MateriaHasHorario(db.Model):
     maestro_id =  Column(Integer, 
         ForeignKey('maestro.id',ondelete='CASCADE'),
         nullable=False)
-    hora_inicio = Column(DateTime, unique=False, nullable=True)
-    hora_fin  = Column(DateTime, unique=False, nullable=True)
+    
 
     def format(self):
         self.grupo = self.getGrupo().toJson()

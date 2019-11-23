@@ -18,7 +18,7 @@ from Models.AdminUser import AdminUser
 from Models.Alumno import Alumno
 from Models.Chofer import Chofer
 from Models.Grupo import Grupo
-from Models.Kardex import Kardex
+from Models.Horario import Horario
 from Models.Maestro import Maestro
 from Models.Materia import Materia
 from Models.MateriaHasHorario import MateriaHasHorario
@@ -27,6 +27,7 @@ from Models.Transporte import Transporte
 
 #Controllers import
 from Controllers.MaestroController import MaestroController
+from Controllers.SolicitudesController import SolicitudesController
 
 #Rutas inicial
 @app.route('/')
@@ -42,3 +43,29 @@ def allMaestros(id=None):
 @app.route('/maestro/<int:id>', methods=['GET'])
 def maestroIndex(id=None):
     return MaestroController.index(id)
+
+
+#Rutas Solicitudes
+@app.route('/solicitud/create', methods=['POST'])
+def createSolicitud():
+    return SolicitudesController.create()
+
+@app.route('/solicitud/index/<int:id>', methods=['GET'])
+def indexSolicitud(id=None):
+    return SolicitudesController.index(id)
+
+@app.route('/solicitud/update/<int:id>', methods=['POST'])
+def updateSolicitud(id=None):
+    return SolicitudesController.update(id)
+
+@app.route('/solicitud/delete/<int:id>', methods=['DELETE'])
+def deleteSolicitud(id=None):
+    return SolicitudesController.delete(id)
+
+@app.route('/solicitud/aprove/<int:id>', methods=['DELETE'])
+def aproveSolicitud(id=None):
+    return Response("Not yet implemented",500)
+
+@app.route('/solicitud/assign/transport/<int:id>', methods=['DELETE'])
+def assignTransportSolicitud(id=None):
+    return Response("Not yet implememted",500)

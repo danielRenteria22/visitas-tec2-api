@@ -14,7 +14,10 @@ class MaestroController(object):
         return jsonify(maestros_json)
 
     @staticmethod
-    def index(id):
+    def index(id,json = True):
         maestro = db.session.query(Maestro).filter_by(id = id).first()
         maestro.format()
-        return jsonify(maestro.toJson())
+        if(json):
+            return jsonify(maestro.toJson())
+        else:
+            return maestro            
