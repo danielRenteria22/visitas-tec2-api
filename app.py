@@ -28,6 +28,8 @@ from Models.Transporte import Transporte
 #Controllers import
 from Controllers.MaestroController import MaestroController
 from Controllers.SolicitudesController import SolicitudesController
+from Controllers.ChoferesController import ChoferesController
+from Controllers.TransportesController import TransportesController
 
 #Rutas inicial
 @app.route('/')
@@ -81,26 +83,26 @@ def assignTransportSolicitud(id=None):
 
 #Rutas choferes
 @app.route('/choferes/all', methods=['GET'])
-def allChoferes(id=None):
-    return Response("Not yet implemented",500)
+def allChoferes():
+    return ChoferesController.all()
 
 @app.route('/choferes/<int:id>', methods=['GET'])
 def indexChoferes(id=None):
-    return Response("Not yet implemented",500)
+    return ChoferesController.index(id)
 
 @app.route('/choferes/disponibles', methods=['GET'])
-def disponiblesChoferes(id=None):
-    return Response("Not yet implemented",500)
+def disponiblesChoferes():
+    return ChoferesController.availables()
 
 #Rutas transportes
 @app.route('/transportes/all', methods=['GET'])
-def alltransportes(id=None):
-    return Response("Not yet implemented",500)
+def alltransportes():
+    return TransportesController.all()
 
 @app.route('/transportes/<int:id>', methods=['GET'])
 def indexTransportes(id=None):
-    return Response("Not yet implemented",500)
+    return TransportesController.index(id)
 
 @app.route('/transportes/disponibles', methods=['GET'])
-def disponiblesTransportes(id=None):
-    return Response("Not yet implemented",500)
+def disponiblesTransportes():
+    return TransportesController.availables()
