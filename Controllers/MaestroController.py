@@ -18,6 +18,7 @@ class MaestroController(object):
         maestro = db.session.query(Maestro).filter_by(id = id).first()
         maestro.format()
         if(json):
+            print(maestro.toJson())
             return jsonify(maestro.toJson())
         else:
             return maestro

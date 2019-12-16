@@ -1,8 +1,10 @@
 from app import db,jsonify
 from sqlalchemy import Column,Integer,DateTime,String,ForeignKey,Boolean
-from MateriaHasHorario import MateriaHasHorario
+from MateriaHasGrupo import MateriaHasGrupo
+from MateriaGrupoHasHoraio import MateriaGrupoHasHoraio
 from Grupo import Grupo
 import datetime
+import copy 
 
 class Maestro(db.Model):
     id = Column(Integer, primary_key=True)
@@ -24,34 +26,41 @@ class Maestro(db.Model):
             "id": self.id,
             "nombre": self.nombre,
             "apellidos": self.apellidos,
-            "horario": self.horario if self.horario else [],
-            "grupos": self.grupos if self.grupos else []
+            "horario": self.horario if hasattr(self, 'horario') else [],
+            "grupos": self.grupos if hasattr(self, 'grupos') else []
         }
 
     def getHorario(self):
-        horario = db.session.query(MateriaHasHorario).filter_by(maestro_id = self.id).all()
-        horario_json = []
-        for clase in horario:
-            clase.format()
-            horario_json.append(clase.toJson())
-        
-        return horario_json
+		grupos = db.session.query(MateriaHasGrupo.id).filter_by(maestro_id = self.id).all()
+		grupos_id = []
+		for grupo in grupos:
+			grupos_id.append(grupo[0])
+
+
+		horario = db.session.query(MateriaGrupoHasHoraio).filter(MateriaGrupoHasHoraio.materia_has_grupo_id.in_(grupos_id)).all()
+		horario_json = []
+		for clase in horario:
+			clase.format()
+			horario_json.append(clase.toJson())
+
+		return horario_json
 
     def getGrupos(self):
-        grupos = db.session.query(MateriaHasHorario.grupo_id).filter_by(maestro_id = self.id).all()
-        grupos_id = []
-        for grupo in grupos:
-            grupos_id.append(grupo[0])
+		grupos = db.session.query(MateriaHasGrupo.grupo_id).filter_by(maestro_id = self.id).all()
+		grupos_id = []
+		for grupo in grupos:
+			grupos_id.append(grupo[0])
 
-        grupos = db.session.query(Grupo).filter(Grupo.id.in_(grupos_id)).all()
-        grupos_json = []
-        for grupo in grupos:
-            grupos_json.append(grupo.toJson())
+		grupos = db.session.query(Grupo).filter(Grupo.id.in_(grupos_id)).all()
+		grupos_json = []
+		for grupo in grupos:
+			grupos_json.append(grupo.toJson())
 
-        return grupos_json
+		return grupos_json
 
     def hasGrupo(self,id_grupo):
-        grupo = db.session.query(MateriaHasHorario).filter_by(maestro_id = self.id)\
-            .filter_by(grupo_id = id_grupo).first()
+		print("id_grupo",id_grupo)
+		grupo = db.session.query(MateriaHasGrupo).filter_by(maestro_id = self.id)\
+			.filter_by(grupo_id = id_grupo).first()
         
-        return True if grupo else False
+		return True if grupo else False

@@ -19,6 +19,8 @@ class SolicitudesController(object):
             maestro_id = request.json.get("maestro_id"),
             grupo_id = request.json.get("grupo_id"),
             descripcion = request.json.get("descripcion"),
+            fecha_hora_fin = datetime.now().strftime("%Y/%m/%d, %H:%M:%S"),
+            fecha_hora_inicio = datetime.now().strftime("%Y/%m/%d, %H:%M:%S")
         )
 
         db.session.add(solicitud)
