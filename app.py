@@ -14,16 +14,18 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 # Models import
+from Models.Maestro import Maestro
 from Models.AdminUser import AdminUser
 from Models.Alumno import Alumno
 from Models.Chofer import Chofer
 from Models.Grupo import Grupo
-from Models.Horario import Horario
-from Models.Maestro import Maestro
 from Models.Materia import Materia
-from Models.MateriaHasHorario import MateriaHasHorario
 from Models.Solicitud import Solicitud
 from Models.Transporte import Transporte
+from Models.MateriaHasGrupo import MateriaHasGrupo
+from Models.MateriaGrupoHasHorario import MateriaGrupoHasHorario
+from Models.Horario import Horario
+
 
 #Controllers import
 from Controllers.MaestroController import MaestroController

@@ -1,7 +1,7 @@
 from app import db,jsonify
 from sqlalchemy import Column,Integer,DateTime,String,ForeignKey,Boolean
 from MateriaHasGrupo import MateriaHasGrupo
-from MateriaGrupoHasHoraio import MateriaGrupoHasHoraio
+from MateriaGrupoHasHorario import MateriaGrupoHasHorario
 from Grupo import Grupo
 import datetime
 import copy 
@@ -37,7 +37,7 @@ class Maestro(db.Model):
 			grupos_id.append(grupo[0])
 
 
-		horario = db.session.query(MateriaGrupoHasHoraio).filter(MateriaGrupoHasHoraio.materia_has_grupo_id.in_(grupos_id)).all()
+		horario = db.session.query(MateriaGrupoHasHorario).filter(MateriaGrupoHasHorario.materia_has_grupo_id.in_(grupos_id)).all()
 		horario_json = []
 		for clase in horario:
 			clase.format()

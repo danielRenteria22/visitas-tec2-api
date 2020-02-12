@@ -2,7 +2,7 @@ from app import db,jsonify,Response
 from sqlalchemy import Column,Integer,DateTime,String,ForeignKey,Boolean
 from Grupo import Grupo
 from Materia import Materia
-from MateriaGrupoHasHoraio import MateriaGrupoHasHoraio
+from MateriaGrupoHasHorario import MateriaGrupoHasHorario
 import datetime
 
 class MateriaHasGrupo(db.Model):
@@ -44,7 +44,7 @@ class MateriaHasGrupo(db.Model):
             .filter_by(fecha_hora_inicio = fecha)\
             .first()
         
-        horario = db.session.query(MateriaGrupoHasHoraio)\
+        horario = db.session.query(MateriaGrupoHasHorario)\
             .filter_by(materia_has_grupo_id = self.id)\
             .filter_by(dia_semana = fecha.weekday())
 

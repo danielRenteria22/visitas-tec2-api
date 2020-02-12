@@ -1,7 +1,7 @@
 from app import jsonify,request,db,Response
 from datetime import datetime
 from Models.Maestro import Maestro
-from Models.MateriaHasGrupo import MateriaGrupoHasHoraio
+from Models.MateriaHasGrupo import MateriaGrupoHasHorario
 
 class MaestroController(object):
     @staticmethod

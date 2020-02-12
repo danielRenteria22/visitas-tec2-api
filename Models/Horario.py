@@ -8,5 +8,5 @@ class Horario(db.Model):
         ForeignKey('alumno.num_control',ondelete='CASCADE'),
         nullable=False)
     materia_has_horario = Column(Integer, 
-        ForeignKey('materia_has_horario.id',ondelete='CASCADE'),
+        ForeignKey('materia_grupo_has_horario.id',ondelete='CASCADE'),
         nullable=False)
